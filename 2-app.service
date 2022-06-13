@@ -1,0 +1,21 @@
+[Unit]
+Description=Java app test
+StartLimitInterval=90
+StartLimitBurst=6
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=test_app
+Group=test_app
+OOMScoreAdjust=-100
+
+
+ExecStart=java -jar /home/retalexe/app.jar /var/log/app_jar.log "System is Running"
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+
+
+[Install]
+WantedBy=multi-user.target
